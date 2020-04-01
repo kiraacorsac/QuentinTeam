@@ -1,0 +1,375 @@
+http://emea-auto.proxy.att.com:8001/
+
+/*
+**********************************************************
+** AT&T IP space browser autoproxy configuration: one-gb.pac
+** Version: 2020.01.21_00
+**********************************************************
+*/
+
+function FindProxyForURL(url, host){
+                if (isPlainHostName(host))
+                return "DIRECT";
+
+        // GSS FOR VIDEO
+        //      else if  (dnsDomainIs(host, "cdn-ito.att.com.edgesuite.net")
+        //      || dnsDomainIs(host, "cdn-mp.att.com"))
+        //      return "PROXY gss.proxy.att.com:8080";
+
+        // STC-LIVE
+                else if (dnsDomainIs(host, "ripb101.ipcoe.att.com")
+                || dnsDomainIs(host, "ripv101.ipcoe.att.com"))
+                return "DIRECT";
+
+        // IBM-WATSON
+                else if (dnsDomainIs(host, ".wbmdn-28801.us-south.bluemix.net")
+                || dnsDomainIs(host, ".att.watsonplatform.ibm.com"))
+                return "PROXY ibmwatson-proxy-gbl.it.att.com:8080";
+
+        // BNOC PROXY DOMAINS
+                else if (dnsDomainIs(host, ".enaf.ipcoe.att.com"))
+                return "PROXY one.proxy.att.com:8080";
+                else if (dnsDomainIs(host, "gcfppymsu.noc.att.com")
+                || dnsDomainIs(host, "gcfpbgmsu.noc.att.com")
+                || dnsDomainIs(host, "gfpdp1.noc.att.com")
+                || dnsDomainIs(host, ".ipcoe.att.com")
+                || dnsDomainIs(host, "rspz0065.web.att.com")
+                || dnsDomainIs(host, ".els-an.att.net"))
+                return "PROXY bnoc.proxy.att.com:8080";
+
+        // SBC, ATT & MISC PROXY MODE EXCEPTIONS
+                else if (dnsDomainIs(host, "brand.sbc.com")
+                || dnsDomainIs(host, "bizeyeview.sbc.com")
+                || dnsDomainIs(host, "biz-eye-view.sbc.com")
+                || dnsDomainIs(host, "blueroom.sbc.com")
+                || dnsDomainIs(host, "csp-secureapp.stage.att.com")
+                || dnsDomainIs(host, "expectit.sbc.com")
+                || dnsDomainIs(host, "hipcs.sbc.com")
+                || dnsDomainIs(host, "hometown.sbc.com")
+                || dnsDomainIs(host, "infowave.web.att.com")
+                || dnsDomainIs(host, "ldbillpay.sbc.com")
+                || dnsDomainIs(host, "ldbillpaytest.sbc.com")
+                || dnsDomainIs(host, "oasis.web.att.com")
+                || dnsDomainIs(host, "oam.sbc.com")
+                || dnsDomainIs(host, "onlinebilling.sbc.com")
+                || dnsDomainIs(host, "onlinebillpay.sbc.com")
+                || dnsDomainIs(host, "www.ap.att.com")
+                || dnsDomainIs(host, "accwex.att.com")
+                || dnsDomainIs(host, "ad-previews.stage.att.com")
+                || dnsDomainIs(host, "portal.stage.att.com")
+                || dnsDomainIs(host, "mmpit.atttest.com")
+                || dnsDomainIs(host, "mmpprodmirror.atttest.com")
+                || dnsDomainIs(host, "mmpqa.atttest.com")
+                || dnsDomainIs(host, "mmptest.atttest.com")
+                || dnsDomainIs(host, ".myvehicle.stage.att.com")
+                || dnsDomainIs(host, "test-statusdb.atttest.com")
+                || dnsDomainIs(host, "scholarships.sbc.com")
+                || dnsDomainIs(host, "secure.sbc.com")
+                || dnsDomainIs(host, "secure-1.sbc.com")
+                || dnsDomainIs(host, "secure-2.sbc.com")
+                || dnsDomainIs(host, "secure1.sbc.com")
+                || dnsDomainIs(host, "secure2.sbc.com")
+                || dnsDomainIs(host, "secure3.sbc.com")
+                || dnsDomainIs(host, "secure4.sbc.com")
+                || dnsDomainIs(host, "smallbizresources.sbc.com")
+                || dnsDomainIs(host, "storage.sbc.com")
+                || dnsDomainIs(host, "yahoo.sbc.com")
+                || dnsDomainIs(host, "mwof.attws.com")                  // go internal 135.209.208.150
+                || dnsDomainIs(host, "webconference1.attws.com")        // go internal 135.209.208.159
+                || dnsDomainIs(host, "webconference2.attws.com")        // go internal 135.209.208.160
+                || dnsDomainIs(host, "webconference3.attws.com")        // go internal 135.209.224.69
+                || dnsDomainIs(host, "care-vex.mobilephone.net")        // can we resolve any of these
+                || dnsDomainIs(host, "mssweb.mobilephone.net")
+                || dnsDomainIs(host, "appcenter.mobilephone.net")
+                || dnsDomainIs(host, "auth-ist-mediamall.mobilephone.net")
+                || dnsDomainIs(host, "auth-uat-appcenter.mobilephone.net")
+                || dnsDomainIs(host, "appcenter-uat.mobilephone.net")
+                || dnsDomainIs(host, "awsapi.activationnow.com")        // dp9571 - remove after FW request
+                || dnsDomainIs(host, "phoneclaim.com")                  // 96.63.68.45 hijacked
+        // MYATT SERVICES-MOBILE
+                || dnsDomainIs(host, "aci-lab-services.stage.att.com")
+                || dnsDomainIs(host, "test-www.wireless.stage.att.com")
+                || dnsDomainIs(host, "tst.stage.att.com")
+                || dnsDomainIs(host, "m.stage.att.com")
+                || shExpMatch(host, "dssdev?-m.stage.att.com")
+                || shExpMatch(host, "dssqa?-m.stage.att.com")
+                || shExpMatch(host, "dssqa-m.stage.att.com")
+                || shExpMatch(host, "e-tst*.stage.att.com")
+                || shExpMatch(host, "myatt*.stage.att.com")
+                || shExpMatch(host, "opss*.stage.att.com")
+                || shExpMatch(host, "wbslqa?.stage.att.com")
+                || shExpMatch(host, "wkmnpqa?.stage.att.com")
+        // NMD WAYPORT.NET                                              // hh9450, aa557w
+                || shExpMatch(host, "nmd.*.wayport.net"))
+                return "PROXY 01uklopxy00.pst.cso.att.com:8080; PROXY 01defrpxy00.pst.cso.att.com:8080; DIRECT";
+
+        // ATT ENTERPRISE DIRECT-MODE DOMAIN EXCEPTIONS
+                else if (dnsDomainIs(host, ".2bfat01*")
+                || dnsDomainIs(host, ".attws.com")
+                || dnsDomainIs(host, ".ameritech.com")
+                || dnsDomainIs(host, ".bls.com")
+                || dnsDomainIs(host, ".bellsouth.com")
+                || dnsDomainIs(host, ".cingularnext.net")
+                || dnsDomainIs(host, ".cingularinteractive.com")
+                || dnsDomainIs(host, ".cingular.net")
+                || dnsDomainIs(host, ".cenims01*")
+                || dnsDomainIs(host, ".corp.stercomm.com")
+                || dnsDomainIs(host, ".mobilephone.net")
+                || dnsDomainIs(host, ".mobile.com")
+                || dnsDomainIs(host, ".onenet*")
+                || dnsDomainIs(host, ".prodigy.net")
+                || dnsDomainIs(host, ".prodigy.com")
+                || dnsDomainIs(host, ".pbis.com")
+                || dnsDomainIs(host, ".pbi.net")
+                || dnsDomainIs(host, ".pbdir.com")
+                || dnsDomainIs(host, ".pacbell.com")
+                || dnsDomainIs(host, ".sbc.com")
+                || dnsDomainIs(host, ".sbcdo.com")
+                || dnsDomainIs(host, ".snet.com")
+                || dnsDomainIs(host, ".swbyps.com")
+                || dnsDomainIs(host, ".swbell.net")
+                || dnsDomainIs(host, ".sbis.net")
+                || dnsDomainIs(host, ".sbcis.net")
+                || dnsDomainIs(host, ".sbcglobal.net")
+        // DATACENTER ZONES
+                || dnsDomainIs(host, ".aldc.att.com")
+                || dnsDomainIs(host, ".kcdc.att.com")
+                || dnsDomainIs(host, ".atdc.att.com")
+                || dnsDomainIs(host, ".medc.att.com")
+                || dnsDomainIs(host, ".jadc.att.com")
+                || dnsDomainIs(host, ".bhdc.att.com")
+                || dnsDomainIs(host, ".chdc.att.com")
+                || dnsDomainIs(host, ".bodc.att.com")
+                || dnsDomainIs(host, ".grdc.att.com")
+                || dnsDomainIs(host, ".madc.att.com")
+                || dnsDomainIs(host, ".wwdc.att.com")
+                || dnsDomainIs(host, ".sldc.sbc.com")
+                || dnsDomainIs(host, ".dadc.sbc.com")
+                || dnsDomainIs(host, ".sfdc.sbc.com")
+                || dnsDomainIs(host, ".nbdc.sbc.com")
+                || dnsDomainIs(host, ".pedc.sbc.com")
+                || dnsDomainIs(host, ".ffdc.sbc.com")
+                || dnsDomainIs(host, ".sddc.sbc.com")
+                || dnsDomainIs(host, ".hydc.sbc.com")
+                || dnsDomainIs(host, ".rmi.sbc.com")
+        // LAB, STAGE & TEST ENVIRONMENTS
+                || dnsDomainIs(host, ".cingularlab.com")
+                || dnsDomainIs(host, "devcentralstg.atttest.com")       // In cM DMZ
+                || dnsDomainIs(host, ".sbctest.com")                    // USED INTERNAL & EXTERNAL
+                || dnsDomainIs(host, ".test.att.com")                   // USED INTERNAL & EXTERNAL
+                || dnsDomainIs(host, ".stage.att.com")                  // USED INTERNAL & EXTERNAL
+                || dnsDomainIs(host, ".atttest.com")                    // USED INTERNAL & EXTERNAL
+                || shExpMatch(host, "atttest.com")                      // USED INTERNAL & EXTERNAL
+                || dnsDomainIs(host, ".dev.att.com")
+				|| dnsDomainIs(host, "owa.labs.att.com")
+                || dnsDomainIs(host, ".intranet.labs.att.com")
+                || dnsDomainIs(host, ".lssl.labs.att.com")
+                || dnsDomainIs(host, ".mpsl.labs.att.com")
+                || dnsDomainIs(host, ".client.research.att.com")
+        // LAB local servers for ft3712
+                || dnsDomainIs(host, ".aeo.att.com")
+                || dnsDomainIs(host, ".aeovm.att.com")
+                || dnsDomainIs(host, ".agmems-dev.att.com")
+                || dnsDomainIs(host, ".agmems-test.att.com")
+                || dnsDomainIs(host, ".agmemsvm.att.com")
+                || dnsDomainIs(host, ".noc.sbss.local")
+        // cB & cM AFFILIATE & DIRECT TRAFFIC
+                || dnsDomainIs(host, ".wayport.net")
+                || dnsDomainIs(host, ".rtd.hgsusa.com")
+                || dnsDomainIs(host, ".netcare.intelligentinfo.com")
+        // ATT INTERNAL-ONLY FQDNS & ZONES
+                || dnsDomainIs(host, "atlprom.att.com")
+                || dnsDomainIs(host, ".biz.att.com")
+                || dnsDomainIs(host, "ebiz.att.com")
+                || dnsDomainIs(host, "intra.att.com")
+				|| dnsDomainIs(host, "ebizweb.att.com")
+				|| dnsDomainIs(host, "intranet.att.com")
+                || dnsDomainIs(host, "webphone.att.com")
+                || dnsDomainIs(host, "www.e-access.att.com")            // CSP
+                || dnsDomainIs(host, ".csp.att.com")                    // CSP DEV
+                || dnsDomainIs(host, "www.ngm.att.com")
+                || shExpMatch(host, "q.att.com")
+                || dnsDomainIs(host, ".q.att.com")
+                || dnsDomainIs(host, "circe.homer.att.com")
+                || dnsDomainIs(host, "iadvantage.att.com")
+                || dnsDomainIs(host, ".americas.att.com")
+                || dnsDomainIs(host, ".ans.att.com")
+                || dnsDomainIs(host, ".ap.att.com")
+                || dnsDomainIs(host, ".attm.att.com")
+                || dnsDomainIs(host, ".cdn.att.com")
+                || dnsDomainIs(host, ".cif.att.com")
+                || dnsDomainIs(host, ".cfo.att.com")
+                || dnsDomainIs(host, ".cso.att.com")
+                || dnsDomainIs(host, ".emea.att.com")
+                || dnsDomainIs(host, ".emedia.att.com")
+                || dnsDomainIs(host, ".exch.att.com")
+                || dnsDomainIs(host, ".gcsc.att.com")
+                || dnsDomainIs(host, ".gsi.att.com")
+                || dnsDomainIs(host, ".ims.att.com")
+                || dnsDomainIs(host, ".insight.att.com")
+                || dnsDomainIs(host, ".intl.att.com")
+                || dnsDomainIs(host, ".it.att.com")
+                || dnsDomainIs(host, ".mt.att.com")
+                || dnsDomainIs(host, ".ncs.att.com")
+                || dnsDomainIs(host, ".noc.att.com")
+                || dnsDomainIs(host, ".oss.att.com")
+                || dnsDomainIs(host, ".quantum.att.com")
+                || dnsDomainIs(host, ".security.att.com")
+                || dnsDomainIs(host, ".sst.att.com")
+                || dnsDomainIs(host, ".us.att.com")
+                || dnsDomainIs(host, ".vci.att.com")
+                || dnsDomainIs(host, ".vtil.att.com")
+                || dnsDomainIs(host, ".web.att.com")
+                || dnsDomainIs(host, "cgate.stage.att.net")
+                || dnsDomainIs(host, "helpme.att.net")
+                || dnsDomainIs(host, "my-digitallife.att.com")
+                || dnsDomainIs(host, "csdo.solutions.att.com")
+                || dnsDomainIs(host, ".alascom.att.com")
+                || dnsDomainIs(host, ".its.att.com")
+                || dnsDomainIs(host, ".tci.att.com")
+                || dnsDomainIs(host, ".sci.att.com")
+                || dnsDomainIs(host, ".?login.att.com")
+        // CINGULAR
+                || dnsDomainIs(host, "gftpdb.cingular.com")
+                || dnsDomainIs(host, "positively.cingular.com")
+                || dnsDomainIs(host, "training-positively.cingular.com")
+                || dnsDomainIs(host, "www.bill.cingular.com")
+        // BELLSOUTH
+                || dnsDomainIs(host, "registration.bellsouth.net")
+                || dnsDomainIs(host, "cnmp-int.bellsouth.net")
+                || dnsDomainIs(host, "adsl.bellsouth.com")
+        // EQUIFAX
+                || dnsDomainIs(host, "interconnect.int9.ui.equifax.com")
+                || dnsDomainIs(host, "interconnect.int9.sts.equifax.com")
+                || dnsDomainIs(host, "interconnect.uat.int.equifax.com")
+                || dnsDomainIs(host, "interconnect.uat.int.sts.equifax.com")
+                || dnsDomainIs(host, "interconnect.internal.sts.equifax.com")
+                || dnsDomainIs(host, "interconnect.internal.ui.equifax.com")
+                || dnsDomainIs(host, "attcas.interconnect.equifax.com")
+                || dnsDomainIs(host, "attcaslite.interconnect.equifax.com")
+        // CRICKET
+                || dnsDomainIs(host, "ezact.cricketcommunications.com")
+        // DISH
+                || dnsDomainIs(host, "bcpartnersupport.dishnetwork.com")
+                || dnsDomainIs(host, "sbcpartnersupport-training.dishnetwork.com")
+                || dnsDomainIs(host, "sbcpartnersupport-test.dishnetwork.com")
+                || dnsDomainIs(host, "salespartners-test.dishnetwork.com")
+                || dnsDomainIs(host, "partnersupport-test.dishnetwork.com")
+                || dnsDomainIs(host, "partnersupport-int1.dishnetwork.com")
+                || dnsDomainIs(host, "testdirector.dishnetwork.com")
+        // LMT
+                || dnsDomainIs(host, "lmt.att.com")
+                || dnsDomainIs(host, "lmt-al.att.com")
+                || dnsDomainIs(host, "lmt-d2d.att.com")
+                || dnsDomainIs(host, "lmt-dmdr.att.com")
+                || dnsDomainIs(host, "lmt-ie.att.com")
+                || dnsDomainIs(host, "lmt-lt.att.com")
+                || dnsDomainIs(host, "lmt-mss.att.com")
+                || dnsDomainIs(host, "lmt-nr.att.com")
+                || dnsDomainIs(host, "lmt-obtm.att.com")
+                || dnsDomainIs(host, "lmt-pdc.att.com")
+        // MEXICO
+                || dnsDomainIs(host, ".mx.att.com")
+        // DTV DIRECT
+                || dnsDomainIs(host, ".dtvops.net")
+                || dnsDomainIs(host, ".dtveng.net")
+        // MISC
+                || dnsDomainIs(host, "telstrat-att.itocservices.com")
+                || dnsDomainIs(host, "gt-dtv-telstr-srs01.itocservices.com")
+                || dnsDomainIs(host, "edgemobile.net")
+                || dnsDomainIs(host, "edgewireless.com")
+                || dnsDomainIs(host, "fs.corp.fleishman.com")
+                || dnsDomainIs(host, "thesource.fleishman.com")
+                || dnsDomainIs(host, "vopmui.mycingular.net")
+                || dnsDomainIs(host, "www.sms800gui.com")
+                || dnsDomainIs(host, "app.somos.com")
+                || dnsDomainIs(host, "webi1.sms800.com")
+                || dnsDomainIs(host, "webi1.somos.com")
+                || dnsDomainIs(host, "wwt.sms800gui.com")
+                || dnsDomainIs(host, "wwd.sms800gui.com")
+                || dnsDomainIs(host, "tutorial-app.somos.com")
+                || dnsDomainIs(host, "delta-app.somos.com")
+                || dnsDomainIs(host, "www.fastaccess.com")
+                || dnsDomainIs(host, "alliance.cingularinteractive.com")
+                || dnsDomainIs(host, "att-wow.atcle.com")
+                || dnsDomainIs(host, "cingular-wow.atics.com")
+                || dnsDomainIs(host, "dobson.net")
+                || dnsDomainIs(host, "att.dalistings.in.tellme.com")
+                || dnsDomainIs(host, "berrysca.net")
+                || dnsDomainIs(host, "myportal.centennialpr.com")
+                || dnsDomainIs(host, "centowiki.centennialpr.com")
+                || dnsDomainIs(host, "sbc.sitesnow.com")
+                || dnsDomainIs(host, "enrolltoprotect.com")
+                || dnsDomainIs(host, "nexxphase.net")
+                || dnsDomainIs(host, "nexxphase.com")
+                || dnsDomainIs(host, "agent.centwire.com")
+                || dnsDomainIs(host, "corp.stercomm.com")
+                || dnsDomainIs(host, "attwireline-cert.activationnow.com")
+                || dnsDomainIs(host, "attwireline-uat.activationnow.com")
+                || dnsDomainIs(host, "cricket.inq.com")
+                || dnsDomainIs(host, "weteachscience.org")
+                || dnsDomainIs(host, ".weteachscience.org")
+                || dnsDomainIs(host, "login.etadirect.com")
+                || dnsDomainIs(host, "api.etadirect.com")
+                || dnsDomainIs(host, "chatroutereast.inq.com")
+                || shExpMatch(host, "*usdc*.etadirect.com")
+                || dnsDomainIs(host, ".intradiem.com")   // cr2515 al1642
+                || dnsDomainIs(host, ".mpsl.att.com")   // je4549
+                || shExpMatch(host, "*corp.bellsouth.net")
+                || shExpMatch(host, "*cnm.bellsouth.com")
+                || shExpMatch(host, "vmware-plugin") //be3187
+                || localHostOrDomainIs(host, "mp.att.com") // ra5719
+                || shExpMatch(host, "autodiscover.att.com") //ak8499
+        // AIO
+                || dnsDomainIs(host, ".at.aiowireless.com")
+                || dnsDomainIs(host, ".it.aiowireless.com")
+        // HALO-E - CSP - GLOBAL LOGON
+                || dnsDomainIs(host, ".elogin.att.com")
+                || dnsDomainIs(host, ".e-access.att.com")
+        // APPNEXUS
+                || dnsDomainIs(host, "corpwiki.appnexus.com")
+                || dnsDomainIs(host, "wiki.appnexus.com")
+                || dnsDomainIs(host, "corp.appnexus.com")
+                || dnsDomainIs(host, "appnexus.net")
+        // OFFICE 365
+                || shExpMatch(host, "exo.att.com")
+                || dnsDomainIs(host, ".exo.att.com")
+
+        // NETWORK DIRECT EXCEPTIONS
+
+        // CLARIFYCM
+                || shExpMatch(host, "135.164.64.52")
+                || shExpMatch(host, "135.164.64.53")
+                || shExpMatch(host, "135.164.64.54")
+                || shExpMatch(host, "135.164.64.55")
+                || shExpMatch(host, "135.164.64.56")
+                || shExpMatch(host, "135.164.64.57")
+                || shExpMatch(host, "135.164.64.58")
+                || shExpMatch(host, "135.164.64.59")
+                || shExpMatch(host, "135.164.64.60")
+                || shExpMatch(host, "155.175.190.21")
+                || shExpMatch(host, "155.175.190.22")
+                || shExpMatch(host, "155.175.190.23")
+                || shExpMatch(host, "155.175.190.24")
+                || shExpMatch(host, "155.175.190.25")
+                || shExpMatch(host, "155.175.190.26")
+                || shExpMatch(host, "155.175.190.27")
+                || shExpMatch(host, "155.175.190.28")
+                || shExpMatch(host, "155.175.190.29")
+                || shExpMatch(host, "155.175.190.63")
+        // CONVERGYS
+                || shExpMatch(host, "155.90.14.212")
+                || shExpMatch(host, "198.206.145.198"))
+                return "DIRECT";
+
+                else if (shExpMatch(host, "1.1.1.2"))
+                alert("Proxy Test IP Match Successful");
+
+                else if (localHostOrDomainIs(host, "autoproxy.attdns.net"))
+                        return "PROXY winner.dns.sbc.com:83";
+                else if (localHostOrDomainIs(host, "autotail.attdns.net"))
+                        return "PROXY winner.dns.sbc.com:84";
+
+                else
+                return "PROXY 01uklopxy00.pst.cso.att.com:8080; PROXY 01defrpxy00.pst.cso.att.com:8080; DIRECT";
+}
